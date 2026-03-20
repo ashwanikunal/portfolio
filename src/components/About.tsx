@@ -27,53 +27,45 @@ export default function About() {
         if (!wrapper || !bigTextSection || !contentPanel || !contentInner) return;
 
         const ctx = gsap.context(() => {
-            // Pin the big "ABOUT ME" text so it stays in place
-            ScrollTrigger.create({
-                trigger: bigTextSection,
-                start: "top top",
-                endTrigger: contentPanel,
-                end: "top top",
-                pin: true,
-                pinSpacing: false,
-                anticipatePin: 1,
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: "top top",
+                    end: "+=300%", // Slows down the scroll by taking 3 full screens
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                },
             });
 
-            // Smooth scale-in for the content panel as it overlaps
-            gsap.fromTo(
+            // 1. Smooth scale-in and slide-up for the content panel
+            tl.fromTo(
                 contentPanel,
-                { scale: 0.95, borderRadius: "60px 60px 0 0" },
+                { y: "110vh", scale: 0.95, borderRadius: "60px 60px 0 0" },
                 {
+                    y: "0%",
                     scale: 1,
                     borderRadius: "40px 40px 0 0",
                     ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: contentPanel,
-                        start: "top bottom",
-                        end: "top 20%",
-                        scrub: 1,
-                    },
-                }
+                    duration: 0.8,
+                },
+                0.1 // starts shortly after scrolling begins
             );
 
-            // Animate content items staggering in as the panel scrolls into view
+            // 2. Animate content items staggering in as the panel moves up
             const items = contentInner.querySelectorAll(".about-reveal");
-            gsap.fromTo(
+            tl.fromTo(
                 items,
                 { y: 60, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
-                    stagger: 0.15,
-                    duration: 1,
+                    stagger: 0.05,
                     ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: contentPanel,
-                        start: "top 70%",
-                        end: "top 20%",
-                        scrub: false,
-                        toggleActions: "play none none none",
-                    },
-                }
+                    duration: 0.4,
+                },
+                0.3 // starts as the panel reaches the middle of the screen
             );
         }, wrapper);
 
@@ -81,85 +73,85 @@ export default function About() {
     }, []);
 
     return (
-        <div id="about" ref={wrapperRef}>
+        // The wrapper dictates the height that will be pinned
+        <div id="about" ref={wrapperRef} className="relative w-full h-screen" style={{ background: "var(--bg-primary)" }}>
+            
             {/* ━━━ SECTION 1: Big static "ABOUT ME" text ━━━ */}
-            <section
-                ref={bigTextSectionRef}
-                className="relative w-full flex items-center justify-center overflow-hidden"
-                style={{
-                    height: "100vh",
-                    background: "var(--bg-primary)",
-                }}
-            >
-                {/* Ambient glow */}
-                <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-                    style={{
-                        background:
-                            "radial-gradient(circle, rgba(0,200,83,0.06) 0%, transparent 70%)",
-                        filter: "blur(80px)",
-                    }}
-                />
-
-                {/* Grid overlay for texture */}
-                <div
-                    className="absolute inset-0 pointer-events-none opacity-30"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(rgba(0,200,83,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,83,0.03) 1px, transparent 1px)",
-                        backgroundSize: "80px 80px",
-                    }}
-                />
-
-                {/* Big text */}
-                <div className="relative z-10 text-center select-none px-4">
-                    <h2
-                        className="font-syne font-black uppercase leading-[0.85]"
-                        style={{
-                            fontSize: "clamp(5rem, 18vw, 18rem)",
-                            background:
-                                "linear-gradient(135deg, #00c853 0%, #00e676 40%, #b9f6ca 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            backgroundClip: "text",
-                            letterSpacing: "-0.04em",
-                        }}
-                    >
-                        About
-                        <br />
-                        Me
-                    </h2>
-                    {/* Decorative line */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <section
+                    ref={bigTextSectionRef}
+                    className="relative w-full h-full flex items-center justify-center"
+                >
+                    {/* Ambient glow */}
                     <div
-                        className="mx-auto mt-8"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
                         style={{
-                            width: "100px",
-                            height: "3px",
                             background:
-                                "linear-gradient(90deg, transparent, #00c853, transparent)",
-                            borderRadius: "2px",
+                                "radial-gradient(circle, rgba(0,200,83,0.06) 0%, transparent 70%)",
+                            filter: "blur(80px)",
                         }}
                     />
-                    {/* Scroll hint */}
-                    <p
-                        className="mt-6 text-xs uppercase tracking-[0.3em] font-medium"
-                        style={{ color: "var(--text-secondary)" }}
-                    >
-                        Scroll to discover
-                    </p>
-                </div>
-            </section>
+
+                    {/* Grid overlay for texture */}
+                    <div
+                        className="absolute inset-0 pointer-events-none opacity-30"
+                        style={{
+                            backgroundImage:
+                                "linear-gradient(rgba(0,200,83,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,83,0.03) 1px, transparent 1px)",
+                            backgroundSize: "80px 80px",
+                        }}
+                    />
+
+                    {/* Big text */}
+                    <div className="relative z-10 text-center select-none px-4">
+                        <h2
+                            className="font-syne font-black uppercase leading-[0.85]"
+                            style={{
+                                fontSize: "clamp(5rem, 18vw, 18rem)",
+                                background:
+                                    "linear-gradient(135deg, #00c853 0%, #00e676 40%, #b9f6ca 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                                letterSpacing: "-0.04em",
+                            }}
+                        >
+                            About
+                            <br />
+                            Me
+                        </h2>
+                        {/* Decorative line */}
+                        <div
+                            className="mx-auto mt-8"
+                            style={{
+                                width: "100px",
+                                height: "3px",
+                                background:
+                                    "linear-gradient(90deg, transparent, #00c853, transparent)",
+                                borderRadius: "2px",
+                            }}
+                        />
+                        {/* Scroll hint */}
+                        <p
+                            className="mt-6 text-xs uppercase tracking-[0.3em] font-medium"
+                            style={{ color: "var(--text-secondary)" }}
+                        >
+                            Scroll to discover
+                        </p>
+                    </div>
+                </section>
+            </div>
 
             {/* ━━━ SECTION 2: Content panel that slides over the big text ━━━ */}
             <section
                 ref={contentPanelRef}
-                className="relative"
+                className="absolute inset-x-0 top-0 overflow-hidden min-h-screen"
                 style={{
                     zIndex: 10,
                     background: "var(--bg-secondary)",
                     borderRadius: "40px 40px 0 0",
-                    marginTop: "-2px",
                     boxShadow: "0 -40px 80px rgba(0,0,0,0.6)",
+                    transform: "translateY(110vh) scale(0.95)" // Initial safe state before GSAP hooks in
                 }}
             >
                 {/* Top edge glow line */}
