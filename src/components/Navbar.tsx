@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
+    { label: "HOME", href: "#home" },
     { label: "SERVICES", href: "#services" },
     { label: "PROJECTS", href: "#projects" },
     { label: "3D", href: "#return3d" },
@@ -44,55 +45,44 @@ export default function Navbar() {
                 className="fixed top-5 left-1/2 z-50 hidden lg:block"
             >
                 <div
-                    className="flex items-center justify-between gap-10 px-7 py-3.5"
+                    className="flex items-center justify-center gap-10 px-7 py-3.5"
                     style={{
                         background: "#0a0a0a",
                         borderRadius: "999px",
                         border: "1px solid rgba(255,255,255,0.08)",
                         boxShadow: "0 8px 40px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(255,255,255,0.04) inset",
-                        minWidth: "720px",
                     }}
                 >
-                    {/* ── Logo ── */}
-                    <a
-                        href="#home"
-                        className="flex-shrink-0"
-                        onClick={() => setActive("#home")}
-                    >
-                        <span
-                            className="font-syne text-lg font-extrabold tracking-widest text-white uppercase select-none"
-                            style={{ letterSpacing: "0.08em" }}
-                        >
-                            Ashwani
-                        </span>
-                    </a>
 
                     {/* ── Nav Links ── */}
-                    <ul className="flex items-center gap-8">
-                        {links.map((l) => (
-                            <li key={l.href}>
-                                <a
-                                    href={l.href}
-                                    onClick={() => setActive(l.href)}
-                                    className="relative text-xs font-semibold tracking-widest transition-colors duration-200"
-                                    style={{
-                                        color: active === l.href ? "#ffffff" : "rgba(255,255,255,0.55)",
-                                        letterSpacing: "0.12em",
-                                    }}
-                                >
-                                    {l.label}
-                                    {/* Active dot */}
-                                    {active === l.href && (
-                                        <motion.span
-                                            layoutId="nav-dot"
-                                            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+                    {links.map((l) => (
+                        <motion.a
+                            key={l.href}
+                            href={l.href}
+                            onClick={() => setActive(l.href)}
+                            className="relative text-xs font-semibold tracking-widest"
+                            style={{
+                                color: active === l.href ? "#ffffff" : "rgba(255,255,255,0.55)",
+                                letterSpacing: "0.12em",
+                            }}
+                            whileHover={{
+                                color: "#ffffff",
+                                textShadow: "0 0 8px rgba(0,200,83,0.6), 0 0 20px rgba(0,230,118,0.3)",
+                            }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {l.label}
+                            {/* Active dot */}
+                            {active === l.href && (
+                                <motion.span
+                                    layoutId="nav-dot"
+                                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                                    style={{ background: "#00e676", boxShadow: "0 0 6px rgba(0,230,118,0.8)" }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                />
+                            )}
+                        </motion.a>
+                    ))}
 
                     {/* ── LET'S TALK Button ── */}
                     <motion.a
@@ -102,15 +92,15 @@ export default function Navbar() {
                         whileTap={{ scale: 0.96 }}
                         className="flex-shrink-0 relative overflow-hidden text-xs font-bold tracking-widest px-5 py-2.5 rounded-full transition-colors duration-300"
                         style={{
-                            border: "1.5px solid rgba(255,255,255,0.8)",
-                            color: hoverTalk ? "#0a0a0a" : "#ffffff",
+                            border: "1.5px solid rgba(0,230,118,0.8)",
+                            color: hoverTalk ? "#000000" : "#00e676",
                             letterSpacing: "0.1em",
                         }}
                     >
                         {/* Fill layer on hover */}
                         <motion.span
                             className="absolute inset-0 rounded-full"
-                            style={{ background: "#ffffff" }}
+                            style={{ background: "#00e676" }}
                             initial={{ scale: 0, opacity: 0 }}
                             animate={hoverTalk
                                 ? { scale: 1, opacity: 1 }
@@ -130,16 +120,18 @@ export default function Navbar() {
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 className="fixed top-0 left-0 w-full z-50 lg:hidden"
                 style={{
-                    background: "rgba(10,10,10,0.95)",
+                    background: "rgba(0,0,0,0.95)",
                     borderBottom: "1px solid rgba(255,255,255,0.06)",
                     backdropFilter: "blur(20px)",
                 }}
             >
                 <div className="flex items-center justify-between px-5 py-4">
-                    {/* Logo */}
+                    {/* Logo / Home */}
                     <a href="#home" onClick={() => setActive("#home")}>
-                        <span className="font-syne text-base font-extrabold tracking-widest text-white uppercase">
-                            Ashwani
+                        <span className="text-xs font-semibold tracking-widest text-white uppercase"
+                            style={{ letterSpacing: "0.12em" }}
+                        >
+                            HOME
                         </span>
                     </a>
 
@@ -185,7 +177,7 @@ export default function Navbar() {
                                             className="block w-full rounded-lg px-4 py-3 text-xs font-semibold tracking-widest transition-colors"
                                             style={{
                                                 color: active === l.href ? "#fff" : "rgba(255,255,255,0.5)",
-                                                background: active === l.href ? "rgba(255,255,255,0.05)" : "transparent",
+                                                background: active === l.href ? "rgba(0,200,83,0.08)" : "transparent",
                                             }}
                                         >
                                             {l.label}
@@ -196,8 +188,8 @@ export default function Navbar() {
                                     <a
                                         href="#contact"
                                         onClick={() => setMenuOpen(false)}
-                                        className="block w-full rounded-full px-5 py-3 text-center text-xs font-bold tracking-widest text-white border"
-                                        style={{ borderColor: "rgba(255,255,255,0.5)" }}
+                                        className="block w-full rounded-full px-5 py-3 text-center text-xs font-bold tracking-widest border"
+                                        style={{ borderColor: "rgba(0,230,118,0.5)", color: "#00e676" }}
                                     >
                                         LET&apos;S TALK
                                     </a>

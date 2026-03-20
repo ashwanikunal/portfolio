@@ -9,7 +9,7 @@ const projects = [
         description:
             "A fully interactive cyberpunk cityscape built in Blender with procedural textures, volumetric lighting, and real-time WebGL preview via Three.js.",
         tags: ["Blender", "Three.js", "GLSL"],
-        color: "from-purple-500 to-pink-600",
+        color: "from-green-500 to-emerald-600",
         emoji: "🌆",
     },
     {
@@ -17,7 +17,7 @@ const projects = [
         description:
             "A real-time project management platform with live collaboration, Kanban boards, Stripe billing, and role-based auth built on Next.js 14.",
         tags: ["Next.js", "TypeScript", "Stripe", "Supabase"],
-        color: "from-blue-500 to-indigo-600",
+        color: "from-emerald-500 to-green-600",
         emoji: "🚀",
     },
     {
@@ -25,7 +25,7 @@ const projects = [
         description:
             "A physics-based racing game with procedurally generated tracks, custom shader effects, and online leaderboards built in Unity.",
         tags: ["Unity", "C#", "Photon", "HLSL"],
-        color: "from-cyan-500 to-teal-600",
+        color: "from-teal-500 to-green-600",
         emoji: "🎮",
     },
     {
@@ -33,7 +33,7 @@ const projects = [
         description:
             "A browser-based image generation tool powered by Stable Diffusion with real-time preview, style presets, and a drag-and-drop editor.",
         tags: ["React", "Python", "FastAPI", "Docker"],
-        color: "from-amber-500 to-orange-600",
+        color: "from-lime-500 to-green-600",
         emoji: "🎨",
     },
     {
@@ -41,7 +41,7 @@ const projects = [
         description:
             "A voice-to-text note taking app with AI summaries, rich-text editing, and end-to-end encryption deployed on Vercel.",
         tags: ["React", "OpenAI", "Node.js", "PostgreSQL"],
-        color: "from-green-500 to-emerald-600",
+        color: "from-green-400 to-emerald-600",
         emoji: "🎙️",
     },
     {
@@ -49,7 +49,7 @@ const projects = [
         description:
             "An immersive archaeological VR experience created with Unreal Engine 5 featuring Nanite geometry and Lumen global illumination.",
         tags: ["Unreal Engine 5", "Nanite", "Lumen"],
-        color: "from-rose-500 to-red-600",
+        color: "from-emerald-400 to-teal-600",
         emoji: "🏛️",
     },
 ];
@@ -77,7 +77,7 @@ export default function Projects() {
             {/* Background accent */}
             <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-3xl opacity-10 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse, #6366f1, transparent)" }}
+                style={{ background: "radial-gradient(ellipse, #00c853, transparent)" }}
             />
 
             <div className="mx-auto max-w-6xl">
@@ -142,7 +142,7 @@ export default function Projects() {
                                             key={t}
                                             className="rounded-md px-2.5 py-1 text-xs font-medium"
                                             style={{
-                                                background: "rgba(255,255,255,0.05)",
+                                                background: "rgba(0,200,83,0.08)",
                                                 color: "var(--text-secondary)",
                                             }}
                                         >
@@ -152,7 +152,7 @@ export default function Projects() {
                                 </div>
 
                                 {/* Arrow link — appears on hover */}
-                                <div className="flex items-center gap-1.5 text-sm font-semibold opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ color: "#818cf8" }}>
+                                <div className="flex items-center gap-1.5 text-sm font-semibold opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" style={{ color: "#00e676" }}>
                                     View Project
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -174,7 +174,7 @@ export default function Projects() {
                         href="#"
                         whileHover={{ scale: 1.05, y: -1 }}
                         whileTap={{ scale: 0.97 }}
-                        className="inline-flex items-center gap-2 rounded-full border px-8 py-3 text-sm font-semibold transition-colors hover:border-indigo-500/40 hover:text-white"
+                        className="inline-flex items-center gap-2 rounded-full border px-8 py-3 text-sm font-semibold transition-colors hover:border-green-500/40 hover:text-white"
                         style={{
                             borderColor: "var(--border-subtle)",
                             color: "var(--text-secondary)",

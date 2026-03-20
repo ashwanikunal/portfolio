@@ -33,7 +33,7 @@ export default function About() {
             {/* ── Background glow ── */}
             <div
                 className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10 pointer-events-none"
-                style={{ background: "radial-gradient(circle, #6366f1, transparent)" }}
+                style={{ background: "radial-gradient(circle, #00c853, transparent)" }}
             />
 
             <div className="mx-auto max-w-6xl">
@@ -88,8 +88,8 @@ export default function About() {
                             href="#"
                             whileHover={{ scale: 1.04, y: -1 }}
                             whileTap={{ scale: 0.97 }}
-                            className="inline-flex items-center gap-2 mt-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg"
-                            style={{ background: "linear-gradient(135deg, #1d6aff, #4fa3ff)" }}
+                            className="inline-flex items-center gap-2 mt-2 rounded-full px-6 py-3 text-sm font-semibold text-black shadow-lg"
+                            style={{ background: "linear-gradient(135deg, #00c853, #00e676)" }}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 3v12" />
@@ -112,7 +112,7 @@ export default function About() {
                                 variants={cardVariants}
                                 initial="hidden"
                                 animate={inView ? "visible" : "hidden"}
-                                className="rounded-2xl border p-6 flex flex-col justify-center hover:border-indigo-500/30 transition-colors"
+                                className="rounded-2xl border p-6 flex flex-col justify-center hover:border-green-500/30 transition-colors"
                                 style={{
                                     background: "var(--bg-card)",
                                     borderColor: "var(--border-subtle)",

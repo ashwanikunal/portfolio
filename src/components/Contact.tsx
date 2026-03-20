@@ -36,8 +36,8 @@ const socials = [
 const inputClass = `
   w-full rounded-xl border px-5 py-3 text-sm text-white
   placeholder-[var(--text-secondary)] outline-none transition-all
-  focus:ring-1 focus:ring-indigo-500/40
-  bg-white/5 border-[var(--border-subtle)] focus:border-indigo-500/50
+  focus:ring-1 focus:ring-green-500/40
+  bg-white/5 border-[var(--border-subtle)] focus:border-green-500/50
 `;
 
 export default function Contact() {
@@ -60,7 +60,7 @@ export default function Contact() {
             {/* Background glow */}
             <div
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-64 rounded-full blur-3xl opacity-10 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse, #a855f7, transparent)" }}
+                style={{ background: "radial-gradient(ellipse, #00c853, transparent)" }}
             />
 
             <div className="mx-auto max-w-6xl" ref={ref}>
@@ -122,8 +122,8 @@ export default function Contact() {
                                     type="submit"
                                     whileHover={{ scale: 1.03, y: -1 }}
                                     whileTap={{ scale: 0.97 }}
-                                    className="w-full rounded-full py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-shadow hover:shadow-indigo-500/40"
-                                    style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+                                    className="w-full rounded-full py-3.5 text-sm font-semibold text-black shadow-lg shadow-green-500/25 transition-shadow hover:shadow-green-500/40"
+                                    style={{ background: "linear-gradient(135deg, #00c853, #00e676)" }}
                                 >
                                     Send Message ✦
                                 </motion.button>
@@ -183,7 +183,7 @@ export default function Contact() {
                                         aria-label={s.label}
                                         whileHover={{ scale: 1.12, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="flex h-11 w-11 items-center justify-center rounded-full border transition-all hover:border-indigo-500/50 hover:text-white hover:bg-indigo-500/10"
+                                        className="flex h-11 w-11 items-center justify-center rounded-full border transition-all hover:border-green-500/50 hover:text-white hover:bg-green-500/10"
                                         style={{
                                             borderColor: "var(--border-subtle)",
                                             color: "var(--text-secondary)",

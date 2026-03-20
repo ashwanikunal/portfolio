@@ -3,19 +3,19 @@
 
 /* ── Design Tokens ── */
 :root {
-  --bg-primary: #050810;
-  --bg-secondary: #080d1a;
-  --bg-card: #0d1526;
-  --text-primary: #f0f4ff;
-  --text-secondary: #8899bb;
-  --accent-start: #1d6aff;
-  --accent-end: #4fa3ff;
-  --accent-cyan: #38bdf8;
-  --border-subtle: rgba(29, 106, 255, 0.12);
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #9e9e9e;
+  --accent-start: #00c853;
+  --accent-end: #00e676;
+  --accent-cyan: #69f0ae;
+  --border-subtle: rgba(0, 200, 83, 0.12);
 
   /* Hero split colors — dark */
-  --hero-left: #050810;
-  --hero-right: #080d1a;
+  --hero-left: #000000;
+  --hero-right: #0a0a0a;
 }
 
 @theme inline {
@@ -45,7 +45,7 @@ body {
 }
 
 ::selection {
-  background: rgba(29, 106, 255, 0.4);
+  background: rgba(0, 200, 83, 0.4);
   color: #fff;
 }
 
@@ -58,16 +58,16 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
-/* ── Gradient text (blue → white) ── */
+/* ── Gradient text (green → white) ── */
 .gradient-text {
-  background: linear-gradient(135deg, #1d6aff 0%, #4fa3ff 55%, #e0f2fe 100%);
+  background: linear-gradient(135deg, #00c853 0%, #00e676 55%, #b9f6ca 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.gradient-text-blue {
-  background: linear-gradient(90deg, #1d6aff 0%, #4fa3ff 55%, #ffffff 100%);
+.gradient-text-green {
+  background: linear-gradient(90deg, #00c853 0%, #00e676 55%, #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -75,15 +75,15 @@ body {
 
 /* ── Glassmorphism navbar ── */
 .glass-nav {
-  background: rgba(5, 8, 16, 0.82);
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border-bottom: 1px solid rgba(29, 106, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 200, 83, 0.15);
 }
 
 /* ── Glass card ── */
 .glass {
-  background: rgba(13, 21, 38, 0.7);
+  background: rgba(17, 17, 17, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
@@ -197,11 +197,11 @@ body {
   z-index: 1;
 }
 
-/* ── Blue grid overlay (subtle) ── */
+/* ── Green grid overlay (subtle) ── */
 .grid-overlay {
   background-image:
-    linear-gradient(rgba(29, 106, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29, 106, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0, 200, 83, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 200, 83, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
