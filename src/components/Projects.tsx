@@ -124,22 +124,42 @@ export default function Projects() {
         if (!wrapper || !bigTextSection || !bigText || !contentPanel) return;
 
         const ctx = gsap.context(() => {
-            // Slow zoom — takes 200vh of scrolling, content follows right after
-            gsap.to(bigText, {
-                scale: 18,
-                opacity: 0,
-                filter: "blur(12px)",
-                ease: "power2.inOut",
+            const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: bigTextSection,
+                    trigger: wrapper,
                     start: "top top",
-                    end: "+=400vh",
+                    end: "+=300%", // 3 full screens of scroll distance (slows it down)
                     pin: true,
                     pinSpacing: true,
                     scrub: 1,
                     anticipatePin: 1,
                 },
             });
+
+            // 1. Text zooms in (lasts the full duration)
+            tl.to(
+                bigText,
+                {
+                    scale: 22,
+                    opacity: 0,
+                    filter: "blur(12px)",
+                    ease: "power2.inOut",
+                    duration: 1,
+                },
+                0
+            );
+
+            // 2. Featured Projects panel slides up to cover the empty zooming text
+            tl.fromTo(
+                contentPanel,
+                { y: "110vh" }, // hides it safely below the viewport
+                {
+                    y: "0%",
+                    ease: "power2.out",
+                    duration: 0.6,
+                },
+                0.4 // starts sliding up when the timeline is 40% complete
+            );
         }, wrapper);
 
         return () => ctx.revert();
@@ -149,83 +169,84 @@ export default function Projects() {
     const duplicated = [...projects, ...projects];
 
     return (
-        <div id="projects" ref={wrapperRef}>
+        // The wrapper dictates the height that will be pinned
+        <div id="projects" ref={wrapperRef} className="relative w-full h-screen" style={{ background: "var(--bg-primary)" }}>
+            
             {/* ━━━ SECTION 1: Big "PROJECTS" text that zooms in ━━━ */}
-            <section
-                ref={bigTextSectionRef}
-                className="relative w-full flex items-center justify-center overflow-hidden"
-                style={{
-                    height: "100vh",
-                    background: "var(--bg-primary)",
-                }}
-            >
-                {/* Ambient glow */}
-                <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-                    style={{
-                        background:
-                            "radial-gradient(circle, rgba(0,200,83,0.06) 0%, transparent 70%)",
-                        filter: "blur(80px)",
-                    }}
-                />
-
-                {/* Subtle grid overlay */}
-                <div
-                    className="absolute inset-0 pointer-events-none opacity-30"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(rgba(0,200,83,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,83,0.03) 1px, transparent 1px)",
-                        backgroundSize: "80px 80px",
-                    }}
-                />
-
-                {/* Big text */}
-                <div className="relative z-10 text-center select-none px-4">
-                    <h2
-                        ref={bigTextRef}
-                        className="font-syne font-black uppercase leading-[0.85]"
-                        style={{
-                            fontSize: "clamp(4rem, 16vw, 16rem)",
-                            background:
-                                "linear-gradient(135deg, #00c853 0%, #00e676 40%, #b9f6ca 100%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            backgroundClip: "text",
-                            letterSpacing: "-0.04em",
-                            willChange: "transform, opacity",
-                        }}
-                    >
-                        Projects
-                    </h2>
-                    {/* Decorative line */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+                <section
+                    ref={bigTextSectionRef}
+                    className="relative w-full h-full flex items-center justify-center"
+                >
+                    {/* Ambient glow */}
                     <div
-                        className="mx-auto mt-8"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
                         style={{
-                            width: "100px",
-                            height: "3px",
                             background:
-                                "linear-gradient(90deg, transparent, #00c853, transparent)",
-                            borderRadius: "2px",
+                                "radial-gradient(circle, rgba(0,200,83,0.06) 0%, transparent 70%)",
+                            filter: "blur(80px)",
                         }}
                     />
-                    <p
-                        className="mt-6 text-xs uppercase tracking-[0.3em] font-medium"
-                        style={{ color: "var(--text-secondary)" }}
-                    >
-                        Scroll to explore
-                    </p>
-                </div>
-            </section>
+
+                    {/* Subtle grid overlay */}
+                    <div
+                        className="absolute inset-0 pointer-events-none opacity-30"
+                        style={{
+                            backgroundImage:
+                                "linear-gradient(rgba(0,200,83,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,83,0.03) 1px, transparent 1px)",
+                            backgroundSize: "80px 80px",
+                        }}
+                    />
+
+                    {/* Big text */}
+                    <div className="relative z-10 text-center select-none px-4">
+                        <h2
+                            ref={bigTextRef}
+                            className="font-syne font-black uppercase leading-[0.85]"
+                            style={{
+                                fontSize: "clamp(4rem, 16vw, 16rem)",
+                                background:
+                                    "linear-gradient(135deg, #00c853 0%, #00e676 40%, #b9f6ca 100%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                                letterSpacing: "-0.04em",
+                                willChange: "transform, opacity",
+                            }}
+                        >
+                            Projects
+                        </h2>
+                        {/* Decorative line */}
+                        <div
+                            className="mx-auto mt-8"
+                            style={{
+                                width: "100px",
+                                height: "3px",
+                                background:
+                                    "linear-gradient(90deg, transparent, #00c853, transparent)",
+                                borderRadius: "2px",
+                            }}
+                        />
+                        <p
+                            className="mt-6 text-xs uppercase tracking-[0.3em] font-medium"
+                            style={{ color: "var(--text-secondary)" }}
+                        >
+                            Scroll to explore
+                        </p>
+                    </div>
+                </section>
+            </div>
 
             {/* ━━━ SECTION 2: Marquee content slides over ━━━ */}
             <section
                 ref={contentPanelRef}
-                className="relative overflow-hidden min-h-screen flex flex-col justify-center"
+                className="absolute inset-x-0 top-0 overflow-hidden min-h-screen flex flex-col justify-center"
                 style={{
                     zIndex: 10,
                     background: "var(--bg-secondary)",
                     borderRadius: "40px 40px 0 0",
                     boxShadow: "0 -40px 80px rgba(0,0,0,0.6)",
+                    transform: "translateY(110vh)" // Initial state before GSAP takes over
                 }}
             >
                 {/* Top edge glow */}
