@@ -35,23 +35,41 @@ export default function About() {
                 end: "top top",
                 pin: true,
                 pinSpacing: false,
+                anticipatePin: 1,
             });
+
+            // Smooth scale-in for the content panel as it overlaps
+            gsap.fromTo(
+                contentPanel,
+                { scale: 0.95, borderRadius: "60px 60px 0 0" },
+                {
+                    scale: 1,
+                    borderRadius: "40px 40px 0 0",
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: contentPanel,
+                        start: "top bottom",
+                        end: "top 20%",
+                        scrub: 1,
+                    },
+                }
+            );
 
             // Animate content items staggering in as the panel scrolls into view
             const items = contentInner.querySelectorAll(".about-reveal");
             gsap.fromTo(
                 items,
-                { y: 50, opacity: 0 },
+                { y: 60, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
-                    stagger: 0.1,
-                    duration: 0.7,
-                    ease: "power2.out",
+                    stagger: 0.15,
+                    duration: 1,
+                    ease: "power3.out",
                     scrollTrigger: {
                         trigger: contentPanel,
-                        start: "top 80%",
-                        end: "top 30%",
+                        start: "top 70%",
+                        end: "top 20%",
                         scrub: false,
                         toggleActions: "play none none none",
                     },
