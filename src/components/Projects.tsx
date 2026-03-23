@@ -8,13 +8,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
     {
-        name: "Neon City",
-        github: "https://github.com",
-        website: "https://example.com",
+        name: "Heart disease Diagnosis",
+        github: "https://github.com/ashwanikunal/Heart-Disease-Analysis.git",
+        website: "https://heart-disease-analysis-m423.onrender.com/",
     },
     {
-        name: "DevSpace",
-        github: "https://github.com",
+        name: "CredIn",
+        github: "https://github.com/ashwanikunal/credIn.git",
         website: "https://example.com",
     },
     {
