@@ -7,10 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-    { value: "3+", label: "Years Experience" },
-    { value: "20+", label: "Projects Completed" },
-    { value: "10+", label: "Happy Clients" },
-    { value: "5+", label: "Awards" },
+    { value: "1.5+", label: "Years Experience" },
+    { value: "10+", label: "Projects Completed" },
+    { value: "5+", label: "Happy Clients" },
 ];
 
 export default function About() {
@@ -198,25 +197,22 @@ export default function About() {
                                     <strong className="text-white font-semibold">
                                         Ashwani Kumar
                                     </strong>{" "}
-                                    — a multidisciplinary creator who lives at the
-                                    intersection of art, technology, and interactive
-                                    experiences. I craft visually stunning 3D worlds,
-                                    build robust full‑stack web applications, and
-                                    design engaging games that leave a lasting
-                                    impression.
+                                   — a 3D Artist and Web Developer.
+
+As a 3D artist, I create detailed models and animations that bring ideas to life. As a developer, I build clean, responsive websites with modern technologies.
+
+I focus on combining creativity and code to deliver engaging digital experiences.
                                 </p>
                                 <p className="about-reveal">
                                     With a passion for pixel-perfect detail and
                                     performance-driven code, I love turning bold
                                     ideas into polished digital realities — whether
-                                    that&apos;s a Blender animation, a sleek Next.js
-                                    app, or an immersive Unity game.
+                                    that&apos;s a Blender animation, or a sleek Next.js
+                                    app.
                                 </p>
                                 <p className="about-reveal">
                                     When I&apos;m not at the keyboard, you&apos;ll
-                                    find me exploring the latest real-time rendering
-                                    techniques, contributing to open-source projects,
-                                    or gaming competitively.
+                                    find me exploring the latest in reading novels, playing basketball or hiking in the great outdoors.
                                 </p>
 
                                 {/* Download CV */}
@@ -243,13 +239,13 @@ export default function About() {
                                                 d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 3v12"
                                             />
                                         </svg>
-                                        Download CV
+                                        Download Resume
                                     </a>
                                 </div>
                             </div>
 
                             {/* Stats grid */}
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-3 gap-4">
                                 {stats.map((s) => (
                                     <div
                                         key={s.label}
