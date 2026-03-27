@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const socials = [
-    { label: "GITHUB", href: "https://github.com" },
-    { label: "LINKEDIN", href: "https://linkedin.com" },
+    { label: "GITHUB", href: "https://github.com/ashwanikunal" },
+    { label: "LINKEDIN", href: "https://www.linkedin.com/in/ashk3105/" },
     { label: "TWITTER", href: "https://twitter.com" },
     { label: "INSTAGRAM", href: "https://instagram.com" },
 ];
