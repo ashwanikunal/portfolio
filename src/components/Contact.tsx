@@ -51,7 +51,7 @@ export default function Contact() {
                         className="email-link inline-block font-syne font-black uppercase leading-none tracking-tight transition-all duration-300"
                         style={{
                             fontSize: "clamp(1.8rem, 5.5vw, 5rem)",
-                            color: "#ffffff",
+                            color: "var(--text-primary)",
                             textDecoration: "none",
                             letterSpacing: "-0.02em",
                         }}
@@ -100,12 +100,12 @@ export default function Contact() {
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="flex flex-wrap justify-between items-center pt-6 border-t"
-                    style={{ borderColor: "rgba(255,255,255,0.06)" }}
+                    style={{ borderColor: "var(--border-light)" }}
                 >
-                    <p className="font-dm text-[11px] tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>
+                    <p className="font-dm text-[11px] tracking-[0.15em] uppercase" style={{ color: "var(--text-faint)" }}>
                         © {new Date().getFullYear()} Ashwani Kumar
                     </p>
-                    <p className="font-dm text-[11px] tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.25)" }}>
+                    <p className="font-dm text-[11px] tracking-[0.15em] uppercase" style={{ color: "var(--text-faint)" }}>
                         Built raw · Shipped with intent
                     </p>
                 </motion.div>

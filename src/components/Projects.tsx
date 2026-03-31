@@ -81,7 +81,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
                 borderColor: "var(--border-subtle)",
             }}
         >
-            <span className="font-syne text-lg font-bold text-white whitespace-nowrap tracking-tight">
+            <span className="font-syne text-lg font-bold whitespace-nowrap tracking-tight" style={{ color: "var(--text-primary)" }}>
                 {project.name}
             </span>
             <span
@@ -375,7 +375,7 @@ export default function Projects() {
                 <div className="relative z-10 flex justify-center pb-20">
                     <a
                         href="#"
-                        className="group inline-flex items-center gap-3 rounded-full border px-8 py-3.5 text-sm font-semibold transition-all duration-300 hover:border-[rgba(0,200,83,0.4)] hover:bg-[rgba(0,200,83,0.05)] hover:text-white"
+                        className="group inline-flex items-center gap-3 rounded-full border px-8 py-3.5 text-sm font-semibold transition-all duration-300 hover:border-[rgba(0,200,83,0.4)] hover:bg-[rgba(0,200,83,0.05)]"
                         style={{
                             borderColor: "var(--border-subtle)",
                             color: "var(--text-secondary)",

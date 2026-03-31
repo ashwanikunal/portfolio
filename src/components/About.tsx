@@ -1,4 +1,3 @@
-"use client";
 
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
@@ -74,7 +73,7 @@ export default function About() {
     return (
         // The wrapper dictates the height that will be pinned
         <div id="about" ref={wrapperRef} className="relative w-full h-screen" style={{ background: "var(--bg-primary)" }}>
-            
+
             {/* ━━━ SECTION 1: Big static "ABOUT ME" text ━━━ */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <section
@@ -194,14 +193,14 @@ export default function About() {
                             <div className="space-y-5 text-[var(--text-secondary)] leading-relaxed text-[15px]">
                                 <p className="about-reveal">
                                     Hi! I&apos;m{" "}
-                                    <strong className="text-white font-semibold">
+                                    <strong className="font-semibold" style={{ color: "var(--text-primary)" }}>
                                         Ashwani Kumar
                                     </strong>{" "}
-                                   — a 3D Artist and Web Developer.
+                                    — a 3D Artist and Web Developer.
 
-As a 3D artist, I create detailed models and animations that bring ideas to life. As a developer, I build clean, responsive websites with modern technologies.
+                                    As a 3D artist, I create detailed models and animations that bring ideas to life. As a developer, I build clean, responsive websites with modern technologies.
 
-I focus on combining creativity and code to deliver engaging digital experiences.
+                                    I focus on combining creativity and code to deliver engaging digital experiences.
                                 </p>
                                 <p className="about-reveal">
                                     With a passion for pixel-perfect detail and

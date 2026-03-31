@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Services from "@/components/Services";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
@@ -16,7 +18,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider>
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <div
         style={{
@@ -28,10 +30,12 @@ export default function Home() {
         <main>
           <Hero />
           <About />
+          <Services />
           <Projects />
           <Contact />
         </main>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
+
