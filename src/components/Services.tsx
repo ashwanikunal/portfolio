@@ -173,7 +173,7 @@ export default function Services() {
         <section
             id="services"
             ref={sectionRef}
-            className="relative w-full h-screen flex items-center overflow-hidden"
+            className="relative w-full h-screen flex flex-col justify-center overflow-hidden pt-20 pb-4"
         >
             {/* Background elements */}
             <div className="noise-overlay absolute inset-0 pointer-events-none" />
@@ -197,17 +197,25 @@ export default function Services() {
                 {/* Header */}
                 <div ref={headerRef}>
                     <p
-                        className="srv-label mb-2 text-sm font-semibold uppercase tracking-[0.3em]"
+                        className="srv-label font-dm text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold mb-2"
                         style={{ color: "var(--accent-cyan)" }}
                     >
                         What I Do
                     </p>
-                    <h2 className="font-syne mb-3 text-2xl font-bold md:text-4xl leading-tight">
-                        <span className="srv-title-word inline-block mr-2">My</span>
-                        <span className="srv-title-word inline-block gradient-text">Services</span>
+                    <h2 
+                        className="srv-title-word font-syne text-5xl md:text-[5rem] lg:text-[9vh] xl:text-[6.5rem] font-black leading-[0.85] tracking-tighter block" 
+                        style={{ color: "var(--text-primary)" }}
+                    >
+                        My
+                    </h2>
+                    <h2 
+                        className="srv-title-word font-syne text-5xl md:text-[5rem] lg:text-[9vh] xl:text-[6.5rem] font-black leading-[0.85] tracking-tighter text-transparent block mb-3" 
+                        style={{ WebkitTextStroke: "2px var(--text-primary)" }}
+                    >
+                        Services
                     </h2>
                     <p
-                        className="srv-subtitle mb-6 max-w-xl text-[14px] leading-relaxed"
+                        className="srv-subtitle mt-2 mb-3 max-w-xl text-[12px] md:text-[13px] leading-snug"
                         style={{ color: "var(--text-secondary)" }}
                     >
                         I specialize in two creative disciplines — bringing ideas to life through
@@ -217,7 +225,7 @@ export default function Services() {
                     {/* Animated divider */}
                     <div
                         ref={lineRef}
-                        className="mb-8 h-px w-full origin-left"
+                        className="mb-5 h-px w-full origin-left"
                         style={{
                             background: "linear-gradient(90deg, #00c853, rgba(0,200,83,0.2), transparent)",
                             transform: "scaleX(0)",
@@ -226,11 +234,11 @@ export default function Services() {
                 </div>
 
                 {/* Cards */}
-                <div ref={cardsRef} className="grid gap-5 md:grid-cols-2">
+                <div ref={cardsRef} className="grid gap-3 md:gap-4 md:grid-cols-2">
                     {services.map((service) => (
                         <div
                             key={service.number}
-                            className="service-card group relative rounded-2xl border p-6 md:p-7 transition-all duration-500 hover:border-green-500/30"
+                            className="service-card group relative rounded-2xl border p-4 md:p-5 lg:p-6 transition-all duration-500 hover:border-green-500/30"
                             style={{
                                 background: "var(--bg-card)",
                                 borderColor: "var(--border-subtle)",
@@ -239,7 +247,7 @@ export default function Services() {
                         >
                             {/* Corner glow on hover */}
                             <div
-                                className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                                className="absolute top-0 right-0 w-28 h-28 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                                 style={{
                                     background: "radial-gradient(circle, rgba(0,200,83,0.08) 0%, transparent 70%)",
                                     filter: "blur(40px)",
@@ -248,9 +256,9 @@ export default function Services() {
                             />
 
                             {/* Number + Icon row */}
-                            <div className="srv-inner flex items-center justify-between mb-4">
+                            <div className="srv-inner flex items-center justify-between mb-2">
                                 <span
-                                    className="font-syne text-5xl font-black leading-none"
+                                    className="font-syne text-4xl md:text-5xl font-black leading-none"
                                     style={{
                                         background: "linear-gradient(135deg, rgba(0,200,83,0.15) 0%, rgba(0,200,83,0.05) 100%)",
                                         WebkitBackgroundClip: "text",
@@ -261,24 +269,27 @@ export default function Services() {
                                     {service.number}
                                 </span>
                                 <div
-                                    className="srv-icon p-3 rounded-2xl transition-colors duration-300 group-hover:bg-green-500/10"
+                                    className="srv-icon p-2.5 rounded-2xl transition-colors duration-300 group-hover:bg-green-500/10"
                                     style={{
                                         background: "rgba(0,200,83,0.05)",
                                         color: "#00e676",
                                     }}
                                 >
-                                    {service.icon}
+                                    {/* Keep the icon but scale via flex/sizing inside the parent. Using scale element for clarity */}
+                                    <div className="scale-90 transform-origin-center">
+                                        {service.icon}
+                                    </div>
                                 </div>
                             </div>
 
                             {/* Title */}
-                            <h3 className="srv-inner font-syne text-lg md:text-xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>
+                            <h3 className="srv-inner font-syne text-[16px] md:text-lg lg:text-xl font-bold mb-1" style={{ color: "var(--text-primary)" }}>
                                 {service.title}
                             </h3>
 
                             {/* Description */}
                             <p
-                                className="srv-inner text-[13px] leading-relaxed mb-4"
+                                className="srv-inner text-[11px] md:text-[12px] lg:text-[13px] leading-snug mb-2 mt-1"
                                 style={{ color: "var(--text-secondary)" }}
                             >
                                 {service.description}
@@ -286,18 +297,18 @@ export default function Services() {
 
                             {/* Divider */}
                             <div
-                                className="srv-inner mb-4 h-px w-full"
+                                className="srv-inner mb-2.5 h-px w-full"
                                 style={{
                                     background: "linear-gradient(90deg, var(--border-subtle), transparent)",
                                 }}
                             />
 
                             {/* Tags */}
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-1.5 md:gap-2">
                                 {service.highlights.map((tag) => (
                                     <span
                                         key={tag}
-                                        className="highlight-tag text-[11px] font-medium px-3 py-1 rounded-full border transition-colors duration-300 hover:border-green-500/40 hover:text-green-400"
+                                        className="highlight-tag text-[10px] md:text-[11px] font-medium px-2 py-0.5 md:px-3 md:py-1 rounded-full border transition-colors duration-300 hover:border-green-500/40 hover:text-green-400"
                                         style={{
                                             borderColor: "var(--border-subtle)",
                                             color: "var(--text-secondary)",
