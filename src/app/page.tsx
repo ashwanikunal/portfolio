@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -18,7 +17,7 @@ export default function Home() {
   }, []);
 
   return (
-    <ThemeProvider>
+    <>
       {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <div
         style={{
@@ -35,7 +34,7 @@ export default function Home() {
           <Contact />
         </main>
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 

@@ -72,7 +72,7 @@ export default function About() {
 
     return (
         // The wrapper dictates the height that will be pinned
-        <div id="about" ref={wrapperRef} className="relative w-full h-screen" style={{ background: "var(--bg-primary)" }}>
+        <div id="about" ref={wrapperRef} className="relative w-full h-screen">
 
             {/* ━━━ SECTION 1: Big static "ABOUT ME" text ━━━ */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">

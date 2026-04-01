@@ -104,7 +104,6 @@ export default function ThreeDPage() {
         <div
             ref={containerRef}
             className="fixed inset-0 z-[9999] flex items-center justify-center"
-            style={{ background: "#ffffff" }}
         >
             {/* Subtle grid pattern */}
             <div
@@ -145,7 +144,7 @@ export default function ThreeDPage() {
                         className="absolute top-0 left-0 h-full rounded-full"
                         style={{
                             width: "0%",
-                            background: "#000",
+                            background: "var(--text-primary)",
                             transition: "width 0.05s linear",
                         }}
                     />
@@ -167,7 +166,7 @@ export default function ThreeDPage() {
                     className="font-syne font-black uppercase"
                     style={{
                         fontSize: "clamp(3rem, 10vw, 10rem)",
-                        color: "#000",
+                        color: "var(--text-primary)",
                         letterSpacing: "-0.03em",
                         lineHeight: 0.95,
                         opacity: 0,
@@ -189,7 +188,8 @@ export default function ThreeDPage() {
                 {/* Back link */}
                 <a
                     href="/"
-                    className="inline-flex items-center gap-2 mt-10 text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full border border-black text-black transition-all duration-300 hover:bg-black hover:text-white"
+                    className="inline-flex items-center gap-2 mt-10 text-xs font-semibold uppercase tracking-widest px-6 py-3 rounded-full border transition-all duration-300 hover:opacity-70"
+                    style={{ borderColor: "var(--text-primary)", color: "var(--text-primary)" }}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

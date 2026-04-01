@@ -25,7 +25,6 @@ export default function Contact() {
             id="contact"
             ref={ref}
             className="relative px-6 pt-28 pb-10 overflow-hidden"
-            style={{ background: "var(--bg-primary)" }}
         >
             <div className="mx-auto max-w-6xl">
                 {/* ── Tagline ── */}

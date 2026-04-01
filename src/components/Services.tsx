@@ -61,161 +61,109 @@ export default function Services() {
         if (!section || !header || !cards || !line) return;
 
         const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: "+=250%",
-                    pin: true,
-                    pinSpacing: true,
-                    scrub: 1,
-                    anticipatePin: 1,
-                },
-            });
+            let mm = gsap.matchMedia();
 
-            /* ── Phase 1: Header reveal ── */
-            // Label slides in from left
-            tl.fromTo(
-                ".srv-label",
-                { x: -120, opacity: 0 },
-                { x: 0, opacity: 1, ease: "power3.out", duration: 0.3 },
-                0
-            );
-
-            // Title words scale up from 0
-            tl.fromTo(
-                ".srv-title-word",
-                { scale: 0, opacity: 0, rotationZ: -8 },
+            // ── Background header fades in independently ──
+            gsap.fromTo(
+                [".srv-label", ".srv-title-word", ".srv-subtitle"],
+                { y: 20, opacity: 0 },
                 {
-                    scale: 1,
+                    y: 0,
                     opacity: 1,
-                    rotationZ: 0,
                     stagger: 0.08,
-                    ease: "back.out(1.7)",
-                    duration: 0.3,
-                },
-                0.05
+                    duration: 0.8,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 75%",
+                    },
+                }
             );
 
-            // Subtitle fades up
-            tl.fromTo(
-                ".srv-subtitle",
-                { y: 40, opacity: 0 },
-                { y: 0, opacity: 1, ease: "power3.out", duration: 0.25 },
-                0.2
-            );
-
-            // Horizontal divider line draws across
-            tl.fromTo(
+            gsap.fromTo(
                 line,
                 { scaleX: 0 },
-                { scaleX: 1, ease: "power2.inOut", duration: 0.3 },
-                0.25
-            );
-
-            /* ── Phase 2: Cards reveal from sides ── */
-            const cardElements = cards.querySelectorAll(".service-card");
-
-            // Card 1 — slides in from left with rotation
-            tl.fromTo(
-                cardElements[0],
                 {
-                    x: "-100vw",
-                    rotationY: 25,
-                    opacity: 0,
-                    transformPerspective: 1000,
-                    transformOrigin: "right center",
-                },
-                {
-                    x: 0,
-                    rotationY: 0,
-                    opacity: 1,
-                    ease: "power3.out",
-                    duration: 0.6,
-                },
-                0.3
-            );
-
-            // Card 2 — slides in from right with rotation
-            tl.fromTo(
-                cardElements[1],
-                {
-                    x: "100vw",
-                    rotationY: -25,
-                    opacity: 0,
-                    transformPerspective: 1000,
-                    transformOrigin: "left center",
-                },
-                {
-                    x: 0,
-                    rotationY: 0,
-                    opacity: 1,
-                    ease: "power3.out",
-                    duration: 0.6,
-                },
-                0.35
-            );
-
-            /* ── Phase 3: Card contents stagger in ── */
-            // Numbers count-reveal
-            cardElements.forEach((card, i) => {
-                const inner = card.querySelectorAll(".srv-inner");
-                tl.fromTo(
-                    inner,
-                    { y: 30, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        stagger: 0.04,
-                        ease: "power3.out",
-                        duration: 0.25,
+                    scaleX: 1,
+                    duration: 0.8,
+                    ease: "power3.inOut",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 75%",
                     },
-                    0.6 + i * 0.08
+                }
+            );
+
+            /* ── Desktop: Minimal Unique Fanning Cards ── */
+            mm.add("(min-width: 768px)", () => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: "+=150%",
+                        pin: true,
+                        scrub: 1,
+                    },
+                });
+
+                const cardElements = cards.querySelectorAll(".service-card");
+                const cardLeft = cardElements[0];
+                const cardRight = cardElements[1];
+                const innersLeft = cardLeft.querySelectorAll(".srv-inner, .highlight-tag, .srv-icon");
+                const innersRight = cardRight.querySelectorAll(".srv-inner, .highlight-tag, .srv-icon");
+
+                // Initialize text to instantly be hidden
+                tl.set([...innersLeft, ...innersRight], { opacity: 0, y: 15 });
+
+                // Step 1: Rise up into the center overlapping
+                tl.fromTo(
+                    cardLeft,
+                    { y: "100vh", xPercent: 54, rotationZ: -5 },
+                    { y: 0, xPercent: 54, rotationZ: -5, duration: 1, ease: "power2.out" },
+                    0
+                );
+                tl.fromTo(
+                    cardRight,
+                    { y: "100vh", xPercent: -54, rotationZ: 5 },
+                    { y: 0, xPercent: -54, rotationZ: 5, duration: 1, ease: "power2.out" },
+                    0.15 // Slight follower lag
+                );
+
+                // Step 2: Fan outward gracefully
+                tl.to(
+                    [cardLeft, cardRight],
+                    { xPercent: 0, rotationZ: 0, duration: 1.2, ease: "power3.inOut" },
+                    1.4
+                );
+
+                // Step 3: Minimal ink-fade for text contents
+                tl.to(
+                    [...innersLeft, ...innersRight],
+                    { opacity: 1, y: 0, duration: 1, stagger: 0.03, ease: "power2.out" },
+                    1.8
                 );
             });
 
-            // Tags cascade in with stagger
-            const allTags = cards.querySelectorAll(".highlight-tag");
-            tl.fromTo(
-                allTags,
-                { scale: 0, opacity: 0 },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    stagger: 0.025,
-                    ease: "back.out(2)",
-                    duration: 0.2,
-                },
-                0.75
-            );
+            /* ── Mobile: Crisp normal stagger ── */
+            mm.add("(max-width: 767px)", () => {
+                gsap.fromTo(
+                    cards.querySelectorAll(".service-card"),
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.2,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: cards,
+                            start: "top 80%",
+                        },
+                    }
+                );
+            });
 
-            // Icon spin-in
-            const icons = cards.querySelectorAll(".srv-icon");
-            tl.fromTo(
-                icons,
-                { rotation: -180, scale: 0, opacity: 0 },
-                {
-                    rotation: 0,
-                    scale: 1,
-                    opacity: 1,
-                    stagger: 0.1,
-                    ease: "back.out(1.7)",
-                    duration: 0.3,
-                },
-                0.55
-            );
-
-            // Card border glow pulse at the end
-            tl.to(
-                cardElements,
-                {
-                    boxShadow: "0 0 40px rgba(0,200,83,0.08), inset 0 1px 0 rgba(0,200,83,0.1)",
-                    duration: 0.3,
-                    stagger: 0.1,
-                },
-                0.85
-            );
-
+            return () => mm.revert();
         }, section);
 
         return () => ctx.revert();
@@ -226,7 +174,6 @@ export default function Services() {
             id="services"
             ref={sectionRef}
             className="relative w-full h-screen flex items-center overflow-hidden"
-            style={{ background: "var(--bg-primary)" }}
         >
             {/* Background elements */}
             <div className="noise-overlay absolute inset-0 pointer-events-none" />

@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import InteractiveGrid from "./InteractiveGrid";
 import { useTheme } from "@/context/ThemeContext";
 
 const roles = ["3D Artist", "Web Developer"];
@@ -47,13 +46,9 @@ export default function Hero() {
             id="home"
             className="relative w-full min-h-screen overflow-hidden"
             style={{
-                background: "var(--bg-primary)",
                 transition: "background 0.4s ease",
             }}
         >
-            {/* ── Interactive grid — lights up on hover (dark mode only) ── */}
-            {isDark && <InteractiveGrid />}
-
             {/* ── Ambient radial glow — center top ── */}
             <div
                 className="absolute inset-0 pointer-events-none"

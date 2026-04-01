@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useTheme } from "@/context/ThemeContext";
 
 const CELL_SIZE = 70;
 const GLOW_RADIUS = 200; // px radius around cursor that lights up cells
@@ -14,12 +15,19 @@ interface Cell {
 }
 
 export default function InteractiveGrid() {
+    const { theme } = useTheme();
+    const isDark = theme === "dark";
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const cellsRef = useRef<Cell[]>([]);
     const mouseRef = useRef({ x: -9999, y: -9999 });
     const rafRef = useRef<number>(0);
     const colsRef = useRef(0);
     const rowsRef = useRef(0);
+
+    // Theme-based colors
+    const primaryGreen = isDark ? "0, 200, 83" : "0, 168, 67";
+    const secondaryGreen = isDark ? "0, 230, 118" : "0, 200, 83";
+    const gridLineColor = isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.03)";
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -30,12 +38,9 @@ export default function InteractiveGrid() {
 
         /* ── Setup grid dimensions ── */
         const resize = () => {
-            const parent = canvas.parentElement;
-            if (!parent) return;
-
             const dpr = window.devicePixelRatio || 1;
-            const w = parent.clientWidth;
-            const h = parent.clientHeight;
+            const w = window.innerWidth;
+            const h = window.innerHeight;
 
             canvas.width = w * dpr;
             canvas.height = h * dpr;
@@ -66,10 +71,9 @@ export default function InteractiveGrid() {
 
         /* ── Mouse tracking ── */
         const onMouseMove = (e: MouseEvent) => {
-            const rect = canvas.getBoundingClientRect();
             mouseRef.current = {
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top,
+                x: e.clientX,
+                y: e.clientY,
             };
         };
 
@@ -77,12 +81,9 @@ export default function InteractiveGrid() {
             mouseRef.current = { x: -9999, y: -9999 };
         };
 
-        // Listen on the parent section for mouse events
-        const parent = canvas.parentElement;
-        if (parent) {
-            parent.addEventListener("mousemove", onMouseMove);
-            parent.addEventListener("mouseleave", onMouseLeave);
-        }
+        // Listen on the window for mouse events
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseleave", onMouseLeave);
 
         /* ── Render loop ── */
         const draw = () => {
@@ -118,18 +119,18 @@ export default function InteractiveGrid() {
                 // Only draw if visible
                 if (cell.opacity > 0.005) {
                     // Draw cell fill (green glow)
-                    ctx.fillStyle = `rgba(0, 200, 83, ${cell.opacity * 0.35})`;
+                    ctx.fillStyle = `rgba(${primaryGreen}, ${cell.opacity * (isDark ? 0.35 : 0.25)})`;
                     ctx.fillRect(cell.x + 1, cell.y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
 
                     // Draw cell border (brighter green)
-                    ctx.strokeStyle = `rgba(0, 230, 118, ${cell.opacity * 0.5})`;
+                    ctx.strokeStyle = `rgba(${secondaryGreen}, ${cell.opacity * (isDark ? 0.5 : 0.4)})`;
                     ctx.lineWidth = 0.8;
                     ctx.strokeRect(cell.x + 0.5, cell.y + 0.5, CELL_SIZE - 1, CELL_SIZE - 1);
                 }
             }
 
             // Draw the static grid lines (very subtle)
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+            ctx.strokeStyle = gridLineColor;
             ctx.lineWidth = 0.5;
 
             for (let col = 0; col <= colsRef.current; col++) {
@@ -161,17 +162,15 @@ export default function InteractiveGrid() {
         return () => {
             cancelAnimationFrame(rafRef.current);
             window.removeEventListener("resize", resize);
-            if (parent) {
-                parent.removeEventListener("mousemove", onMouseMove);
-                parent.removeEventListener("mouseleave", onMouseLeave);
-            }
+            window.removeEventListener("mousemove", onMouseMove);
+            window.removeEventListener("mouseleave", onMouseLeave);
         };
     }, []);
 
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 pointer-events-none z-0"
+            className="fixed inset-0 pointer-events-none z-0"
             style={{ opacity: 0 }}
         />
     );
